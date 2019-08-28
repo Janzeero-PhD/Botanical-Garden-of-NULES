@@ -5,6 +5,8 @@ library(DT)
 library(shinydashboard)
 library(ECharts2Shiny)
 
+unloadNamespace('osmar')
+
 ui <- dashboardPage(skin = "green", 
                     title = "Електронна карта дерев Ботанічного саду НУБІП",
   header <- dashboardHeader(title = "Електронна карта дерев Ботанічного саду НУБІП",
