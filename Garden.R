@@ -14,10 +14,10 @@ library(openxlsx)
 library(RColorBrewer)
 
 ### csv files
-bot1 <- read_csv("bot1.csv", locale = locale(encoding = "WINDOWS-1251"))
-bot2 <- read_csv("bot2.csv", locale = locale(encoding = "WINDOWS-1251"))
-bot3 <- read_csv("bot3.csv", locale = locale(encoding = "WINDOWS-1251"))
-bot4 <- read_csv("bot4.csv", locale = locale(encoding = "WINDOWS-1251"))
+bot1 <- read_csv("bot1.csv")
+bot2 <- read_csv("bot2.csv")
+bot3 <- read_csv("bot3.csv")
+bot4 <- read_csv("bot4.csv")
 
 # one data.frame
 botsad.df <- rbind(bot1, bot2, bot3, bot4)
@@ -110,22 +110,6 @@ tree_ex_path <- 'www/tree_ex.png'
 spruce_ex_path <- 'www/spruce_ex.png'
 tree_path <- 'www/tree.png'
 pine_path <- 'www/spruce.png'
-
-# set of icons
-set_icons <- icons(
-  iconUrl = ifelse(botsad.final$Type == "хвойне" & botsad.final$Rare == "екзот",
-                   spruce_ex_path, ifelse(
-                     botsad.final$Type == "хвойне" & botsad.final$Rare == "місцевий",
-                     pine_path, ifelse(
-                       botsad.final$Type == "листяне" & botsad.final$Rare == "екзот",
-                       tree_ex_path, ifelse(
-                         botsad.final$Type == "чагарник" & botsad.final$Rare == "місцевий",
-                         shrub_path, ifelse(
-                           botsad.final$Type == "листяне" & botsad.final$Rare == "місцевий", 
-                            tree_path, shrub_ex_path))))),
-  iconWidth = 15, iconHeight = 15,
-  iconAnchorX = 10, iconAnchorY = 10
-)
 
 # unique levels of species
 unique(botsad.final$species_5)
@@ -225,3 +209,18 @@ sum(botsad.final$`Вартість енергії (грн/рік)`, na.rm = T) #
   
 botsad.pie <- c(enc2native(rep("Депонований вуглець", 7473.9)),
                        enc2native(rep("Акумульована енергія", 21519.6)))
+# set of icons
+set_icons <- icons(
+  iconUrl = ifelse(botsad.final$Type == "хвойне" & botsad.final$Rare == "екзот",
+                   spruce_ex_path, ifelse(
+                     botsad.final$Type == "хвойне" & botsad.final$Rare == "місцевий",
+                     pine_path, ifelse(
+                       botsad.final$Type == "листяне" & botsad.final$Rare == "екзот",
+                       tree_ex_path, ifelse(
+                         botsad.final$Type == "чагарник" & botsad.final$Rare == "місцевий",
+                         shrub_path, ifelse(
+                           botsad.final$Type == "листяне" & botsad.final$Rare == "місцевий", 
+                            tree_path, shrub_ex_path))))),
+  iconWidth = 15, iconHeight = 15,
+  iconAnchorX = 10, iconAnchorY = 10
+)
